@@ -12,12 +12,13 @@ console.log(process.env);
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.HOST,
-      port: Number(process.env.HOST_PORT),
+      port: Number(process.env.PORT),
       username: process.env.USER,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      models: [],
-      autoLoadModels: true,
+      models: [], 
+      autoLoadModels: true, 
+      logging: false 
     })
   ],
   controllers: [AppController],

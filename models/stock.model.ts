@@ -2,12 +2,12 @@ import { Model, Column, Table, DataType, HasMany } from 'sequelize-typescript'
 import { Wine } from './wine.model';
 
 @Table({
-    tableName: 'WineCellar',
+    tableName: 'Stock',
     underscored: true,
     timestamps: true,
     paranoid: true
 })
-export class WineCellar extends Model<WineCellar> {
+export class Stock extends Model<Stock> {
     @Column({
         type: DataType.UUID,
         allowNull: false,
@@ -18,19 +18,12 @@ export class WineCellar extends Model<WineCellar> {
     id: string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.INTEGER,
         allowNull: false
     })
-    name: string;
-
-    @Column({
-        type: DataType.TEXT,
-        allowNull: false,
-        defaultValue: 'null'
-    })
-    description: string;
+    value: number;
 
     @HasMany(() => Wine, 'wineId')
-    wines: Wine[];
+    wine: Wine[];
 
 }

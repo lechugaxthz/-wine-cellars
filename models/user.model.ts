@@ -1,35 +1,48 @@
-import { Model, Column, Table, Default, AllowNull, DataType, BelongsToMany } from 'sequelize-typescript'
-import { Wine } from './wine.model';
+import { Model, Column, Table, DataType, BelongsToMany } from 'sequelize-typescript'
 import { User_Wine } from './modelsRelacional/user-wine.model';
+import { Wine } from './wine.model';
 
 @Table({
     tableName: 'Users',
+    underscored: true,
     timestamps: true,
     paranoid: true
 })
 export class User extends Model<User> {
-    @Column(DataType.UUID)
-    @AllowNull(false)
-    @Default(DataType.UUIDV4)
-    id: typeof DataType.UUID;
+    @Column({
+        type: DataType.UUID,
+        allowNull: false,
+        primaryKey: true,
+        unique: true,
+        defaultValue: DataType.UUIDV4
+    })
+    id: string;
 
-    @Column(DataType.STRING)
-    @AllowNull(false)
+    @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
     name: string;
 
-    @Column(DataType.STRING)
-    @AllowNull(false)
-    @Default(null)
-    local: string | null;
+    @Column({
+        type: DataType.TEXT,
+        allowNull: false,
+        defaultValue: 'null'
+    })
+    local: string;
 
-    @Column(DataType.STRING)
-    @AllowNull(false)
-    email: string
+    @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
+    email: string;
 
-    @Column(DataType.STRING)
-    @AllowNull(false)
-    password: string
+    @Column({
+        type: DataType.STRING,
+        allowNull: false
+    })
+    password: string;
 
     @BelongsToMany(() => Wine, () => User_Wine)
-    Wines: Wine[]
+    wines: Wine[];
 }

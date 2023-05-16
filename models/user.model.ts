@@ -43,6 +43,13 @@ export class User extends Model<User> {
     })
     password: string;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+        defaultValue: 'locale'
+    })
+    typeLogin: string
+
     @BelongsToMany(() => Wine, () => User_Wine)
     wines: Wine[];
 }

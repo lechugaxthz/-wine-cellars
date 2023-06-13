@@ -1,4 +1,4 @@
-import { Model, Column, Table, DataType, HasMany } from 'sequelize-typescript'
+import { Model, Column, Table, DataType, HasMany, HasOne } from 'sequelize-typescript'
 import { Wine } from './wine.model';
 
 @Table({
@@ -23,7 +23,7 @@ export class Stock extends Model<Stock> {
     })
     value: number;
 
-    @HasMany(() => Wine, 'wineId')
+    @HasOne(() => Wine, 'wineId')
     wine: Wine[];
 
 }

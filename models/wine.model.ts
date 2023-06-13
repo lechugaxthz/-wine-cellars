@@ -38,20 +38,78 @@ export class Wine extends Model<Wine> {
     @BelongsTo(() => Category, 'categoryId')
     category: Category;
 
+    @Column({
+        type: DataType.UUID,
+    })
+    categoryId: string
+
+    setCategory(category: Category): Promise<void> {
+        this.categoryId = category.id;
+        this.category = category;
+        return
+    }
+
     @BelongsTo(() => Type, 'typeId')
     type: Type;
+
+    @Column({
+        type: DataType.UUID,
+    })
+    typeId: string;
+
+    setType(type: Type): Promise<void> {
+        this.typeId = type.id;
+        this.type = type;
+        return
+    }
 
     @BelongsTo(() => AlcoholContent, 'alcoholContentId')
     alcoholContent: AlcoholContent;
 
+    @Column({
+        type: DataType.UUID,
+    })
+    alcoholContentId: string;
+
+    setAlcoholContent(alcoholContent: AlcoholContent): Promise<void> {
+        this.alcoholContentId = alcoholContent.id;
+        this.alcoholContent = alcoholContent;
+        return
+    }
+
     @BelongsTo(() => Stock, 'stockId')
     stock: Stock;
+
+    @Column({
+        type: DataType.UUID,
+    })
+    stockId: string;
+
+    setStock(stock: Stock): Promise<void> {
+        this.stockId = stock.id;
+        this.stock = stock;
+        return
+    }
 
     @BelongsTo(() => WineCellar, 'wineCellarId')
     wineCellar: WineCellar;
 
+    @Column({
+        type: DataType.UUID,
+    })
+    wineCellarId: string;
+
+    setWineCellar(wineCellar: WineCellar): Promise<void> {
+        this.wineCellarId = wineCellar.id;
+        this.wineCellar = wineCellar;
+        return
+    }
+
     @BelongsToMany(() => User, () => User_Wine)
     user: User[];
 
+    addUser(user: User): Promise<User_Wine> {
+        return User_Wine.create({ userId: user.id, wineId: this.id });
+    }
 
 }
